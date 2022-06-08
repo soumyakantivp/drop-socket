@@ -13,6 +13,7 @@ public class InterceptController {
 	@GetMapping("/webhook")
 	public ResponseEntity<String> usingResponseEntityBuilderAndHttpHeaders(@RequestParam String challenge) {
 	    HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.clear();
 	    responseHeaders.set("Content-Type", 
 	      "text/plain");
 	    responseHeaders.set("X-Content-Type-Options", 
@@ -20,6 +21,6 @@ public class InterceptController {
 
 	    return ResponseEntity.ok()
 	      .headers(responseHeaders)
-	      .body("{\"challenge\":\""+challenge+"\"}");
+	      .body(challenge);
 	}
 }
