@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class InterceptController {
@@ -25,7 +26,11 @@ public class InterceptController {
 	@PostMapping(value = "/webhook", consumes = "application/json")
 	public String updatePerson(@RequestBody String payload) {
 		
-		System.out.println(payload);
+		System.out.println("pay: "+payload);
+		String url = "https://sokt.io/c/app/qy41HjusBSyHrbyLJ3xe/ep";
+		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.getForObject(url, String.class);
+		System.out.println(result);
 		return "redirect:/test";
 	}
 }
