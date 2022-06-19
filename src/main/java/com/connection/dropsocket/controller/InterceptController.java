@@ -1,6 +1,7 @@
 package com.connection.dropsocket.controller;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +25,13 @@ public class InterceptController {
 	}
 
 	@PostMapping(value = "/webhook", consumes = "application/json")
-	public String updatePerson(@RequestBody String payload) {
-		
+	public ResponseEntity updatePerson(@RequestBody String payload) {
+		ResponseEntity r = new ResponseEntity(HttpStatus.OK);
 		System.out.println("pay: "+payload);
 		String url = "https://sokt.io/c/app/qy41HjusBSyHrbyLJ3xe/ep";
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(url, String.class);
 		System.out.println(result);
-		return "redirect:/test";
+		return r;
 	}
 }
