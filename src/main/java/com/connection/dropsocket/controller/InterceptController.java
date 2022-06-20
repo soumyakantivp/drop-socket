@@ -1,5 +1,6 @@
 package com.connection.dropsocket.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +17,9 @@ import org.springframework.web.client.RestTemplate;
 public class InterceptController {
 	private String challenge;
 	
+	@Autowired
+	private  RestTemplate restTemplate;
+	
 	@GetMapping("/webhook")
 	public ResponseEntity<String> verify(@RequestParam String challenge) {
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -31,7 +35,7 @@ public class InterceptController {
 		//ResponseEntity r = new ResponseEntity(HttpStatus.OK);
 	
 		String url = "https://sokt.io/c/app/qy41HjusBSyHrbyLJ3xe/ep";
-		RestTemplate restTemplate = new RestTemplate();
+		
 		String result = restTemplate.getForObject(url, String.class);
 		System.out.println(result);
 	
