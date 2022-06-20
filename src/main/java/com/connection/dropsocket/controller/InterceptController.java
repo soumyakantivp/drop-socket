@@ -1,6 +1,8 @@
 package com.connection.dropsocket.controller;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +38,8 @@ public class InterceptController {
 		responseHeaders.clear();
 		responseHeaders.set("Content-Type", "text/plain");
 		responseHeaders.set("X-Content-Type-Options", "nosniff");
-
-		return ResponseEntity.ok().headers(responseHeaders).body("");
+		HttpEntity<String> entity = new HttpEntity<>(responseHeaders);
+		ResponseEntity<String> responseJson = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+		return responseJson;
 	}
 }
