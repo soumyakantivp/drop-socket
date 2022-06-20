@@ -40,6 +40,6 @@ public class InterceptController {
 		responseHeaders.set("Content-Type", "text/plain");
 		responseHeaders.set("X-Content-Type-Options", "nosniff");
 
-		return ResponseEntity.ok().headers(responseHeaders).body(challenge);
+		return ResponseEntity.ok().headers(responseHeaders).body("");
 	}
 }
