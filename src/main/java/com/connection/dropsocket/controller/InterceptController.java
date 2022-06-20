@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class InterceptController {
+	private String challenge;
+	
 	@GetMapping("/webhook")
 	@ResponseBody
 	public ResponseEntity<String> verify(@RequestParam String challenge) {
@@ -20,18 +22,24 @@ public class InterceptController {
 		responseHeaders.clear();
 		responseHeaders.set("Content-Type", "text/plain");
 		responseHeaders.set("X-Content-Type-Options", "nosniff");
-
+		this.challenge = challenge;
 		return ResponseEntity.ok().headers(responseHeaders).body(challenge);
 	}
 
 	@PostMapping(value = "/webhook", consumes = "application/json")
-	public ResponseEntity updatePerson(@RequestBody String payload) {
-		ResponseEntity r = new ResponseEntity(HttpStatus.OK);
+	public ResponseEntity<String> updatePerson(@RequestBody String payload) {
+		//ResponseEntity r = new ResponseEntity(HttpStatus.OK);
 		System.out.println("pay: "+payload);
 		String url = "https://sokt.io/c/app/qy41HjusBSyHrbyLJ3xe/ep";
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(url, String.class);
 		System.out.println(result);
-		return r;
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.clear();
+		responseHeaders.set("Content-Type", "text/plain");
+		responseHeaders.set("X-Content-Type-Options", "nosniff");
+
+		return ResponseEntity.ok().headers(responseHeaders).body(challenge);
 	}
 }
