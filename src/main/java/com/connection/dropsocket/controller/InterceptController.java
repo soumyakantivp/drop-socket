@@ -45,10 +45,10 @@ public class InterceptController {
 
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET,entity,String.class);
 
-            System.out.println(response);
+            System.out.println(payload);
             return response;
         } catch (Exception ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
 		return null;
 		
