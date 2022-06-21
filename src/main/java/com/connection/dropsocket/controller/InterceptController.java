@@ -34,10 +34,10 @@ public class InterceptController {
 	public ResponseEntity<String> updatePerson(@RequestBody String payload) {
 		//ResponseEntity r = new ResponseEntity(HttpStatus.OK);
 	
-		//String url = "https://sokt.io/c/app/qy41HjusBSyHrbyLJ3xe/ep";
+		String url = "https://sokt.io/c/app/qy41HjusBSyHrbyLJ3xe/ep";
 		
-		//String result = restTemplate.getForObject(url, String.class);
-		System.out.println(payload);
+		String result = restTemplate.getForObject(url, String.class);
+		System.out.println(result);
 	
 		return new ResponseEntity<String> (HttpStatus.OK);
 	}
